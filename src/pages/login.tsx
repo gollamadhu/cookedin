@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./login.css";
+import LoginPageMain from "./loginPageMain";
 
 type LoginProps = {
   goToRegister: () => void;
+  onLoginSuccess: (username: string) => void;
 };
 
-function Login({ goToRegister }: LoginProps) {
+
+function Login({ goToRegister, onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -78,7 +81,7 @@ function Login({ goToRegister }: LoginProps) {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Login Successful 🎉");
+         onLoginSuccess(username);
 
         // Clear fields
         setUsername("");
